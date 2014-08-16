@@ -8,6 +8,7 @@
 	<body>
 		<nav class="navbar navbar-default" role="navigation">
 	        <div class="container-fluid">
+	        <!-- PUT THIS IN ONCE WE HAVE SESSIONS WORKING!--> <% #if session[:token] %> 
 	          <div class="navbar-header">
 	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 	              <span class="sr-only">Toggle navigation</span>
@@ -24,6 +25,7 @@
 	              <li><a href="#">Page Name</a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
+	         <!-- PUT THIS IN ONCE WE HAVE SESSIONS!-->  <% #end %> 
 	        </div><!--/.container-fluid -->
 	    </nav>
 
