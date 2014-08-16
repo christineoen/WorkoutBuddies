@@ -18,6 +18,7 @@ module WorkoutBuddies
           zip integer,
           email text,
           phone varchar(30),
+          refresh_token text,
           created_at timestamp NOT NULL DEFAULT current_timestamp
           )])
       @db.exec(%q[
@@ -42,17 +43,51 @@ module WorkoutBuddies
           )])
     end
 
-    #### USERS ####
+    ##### USERS #####
  
  
     def build_user(data)
-      RPS::User.new(data)
+      WorkoutBuddies::User.new(data)
+    end
+
+    def get_user_by_user_id(user_id)
+      result = @db.exec_params(%Q[
+        SELECT * FROM users
+        WHERE username = $1;
+      ], [username])
+    
+      end
     end
 
 
-    #####  ACTIVITIES  #####
+    #####  ACTIVITY MATCHING  #####
+
+    def get_users_by_activity_id(activity_id)
+      result = @db.exec_params(%q[
+        SELECT user_id FROM matching
+        WHERE activity_id = $1;
+        ], [activity_id])
+
+      return result
+      
+    end
 
 
+
+    #####  EVENTS  #####
+
+    def build_event(data)
+      WorkoutBuddies::Event.new(data)
+    end
+
+    def get_events_by_zip(zip)
+      result = @db.exec_params(%q[
+        SELECT * FROM events
+        WHERE zip = $1;
+        ], [zip])
+
+      result.map {|row| build_event(row)}
+    end
 
 
 

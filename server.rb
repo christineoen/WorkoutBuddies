@@ -33,23 +33,23 @@ $authorization = Signet::OAuth2::Client.new(
 $client = Google::APIClient.new
 
 
-get '/index1'
+get '/index1' do
   erb :index
 end
 
-get '/create_event1'
+get '/create_event1' do
   erb :create_event
 end
 
-get '/buddies1'
+get '/buddies1' do
   erb :buddies
 end
 
-get 'events1'
+get 'events1' do
   erb :events
 end
 
-get 'home1'
+get 'home1' do
   erb :home
 end
 
