@@ -15,4 +15,5 @@ module WorkoutBuddies
     end
 
   end
+
 end

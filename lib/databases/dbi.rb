@@ -50,11 +50,13 @@ module WorkoutBuddies
       WorkoutBuddies::User.new(data)
     end
 
-    def get_user_by_user_id(user_id)
+    def get_user_by_id(user_id)
       result = @db.exec_params(%Q[
         SELECT * FROM users
-        WHERE username = $1;
-      ], [username])
+        WHERE user_id = $1;
+      ], [user_id])
+
+      return result.first
     
     end
 
@@ -67,8 +69,7 @@ module WorkoutBuddies
         WHERE activity_id = $1;
         ], [activity_id])
 
-      return result
-      
+        result.map{|user_id| get_user_by_id(user_id['user_id'])}
     end
 
 
