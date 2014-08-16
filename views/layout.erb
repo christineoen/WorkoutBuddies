@@ -2,12 +2,13 @@
 <html>
 	<head>
 		<title>Workout Buddies</title>
-		<link rel="stylesheet" type="text/css" href="../public/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="../css/styles.css">
 	</head>
 	<body>
 		<nav class="navbar navbar-default" role="navigation">
 	        <div class="container-fluid">
+	        <!-- PUT THIS IN ONCE WE HAVE SESSIONS WORKING!--> <% #if session[:token] %> 
 	          <div class="navbar-header">
 	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 	              <span class="sr-only">Toggle navigation</span>
@@ -24,13 +25,16 @@
 	              <li><a href="#">Page Name</a></li>
 	            </ul>
 	          </div><!--/.nav-collapse -->
+	         <!-- PUT THIS IN ONCE WE HAVE SESSIONS!-->  <% #end %> 
 	        </div><!--/.container-fluid -->
 	    </nav>
+
+	    <%= yield %>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     	<!-- Include all compiled plugins (below), or include individual files as needed -->
-    	<script src="bootstrap/js/bootstrap.min.js"></script>
+    	<script src="../bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../js/main.js"></script>
 	</body>
 </html>
