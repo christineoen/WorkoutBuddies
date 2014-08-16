@@ -17,7 +17,7 @@ module WorkoutBuddies
           address text,
           zip integer,
           email text,
-          phone varchar(30)
+          phone varchar(30),
           created_at timestamp NOT NULL DEFAULT current_timestamp
           )])
       @db.exec(%q[
@@ -27,59 +27,32 @@ module WorkoutBuddies
           )])
       @db.exec(%q[
         CREATE TABLE IF NOT EXISTS matching(
-          id serial NOT NULL PRIMARY KEY
+          id serial NOT NULL PRIMARY KEY,
           activity_id integer REFERENCES activities(activity_id),
           user_id integer REFERENCES users(user_id)
+          )])
+      @db.exec(%q[
+        CREATE TABLE IF NOT EXISTS events(
+          event_id serial NOT NULL PRIMARY KEY,
+          event_name text,
+          address text,
+          zip integer,
+          user_id integer REFERENCES users(user_id),
+          created_at timestamp NOT NULL DEFAULT current_timestamp
           )])
     end
 
     #### USERS ####
  
-    def register_user(user)
-        @db.exec_params(%q[
-        INSERT INTO users (username, password_digest)
-        VALUES ($1, $2);
-        ], [user.username, user.password_digest])
-    end
- 
-    def get_user_by_username(username)
-      result = @db.exec(%Q[
-        SELECT *
-        FROM users
-        WHERE username = '#{username}';
-      ])
- 
-      user_data = result.first
- 
-      if user_data
-        build_user(user_data)
-      else
-        nil
-      end
-    end
- 
-    def username_exists?(username)
-      result = @db.exec(%Q[
-        SELECT *
-        FROM users
-        WHERE username = $1;
-      ], [username])
- 
-      if result.count > 0
-        true
-      else
-        false
-      end
-    end
  
     def build_user(data)
-      RPS::User.new(data['username'], data['password_digest'])
+      RPS::User.new(data)
     end
 
 
     #####  ACTIVITIES  #####
 
-    
+
 
 
 
