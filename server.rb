@@ -56,103 +56,103 @@ end
 
 ##
 # Connect the user with Google+ and store the credentials.
-post '/connect' do
-  # Get the token from the session if available or exchange the authorization
-  # code for a token.
-  if !session[:token]
-    # Make sure that the state we set on the client matches the state sent
-    # in the request to protect against request forgery.
-    if session[:state] == params[:state]
-      # Upgrade the code into a token object.
-      $authorization.code = request.body.read
-      $authorization.fetch_access_token!
-      $client.authorization = $authorization
+# post '/connect' do
+#   # Get the token from the session if available or exchange the authorization
+#   # code for a token.
+#   if !session[:token]
+#     # Make sure that the state we set on the client matches the state sent
+#     # in the request to protect against request forgery.
+#     if session[:state] == params[:state]
+#       # Upgrade the code into a token object.
+#       $authorization.code = request.body.read
+#       $authorization.fetch_access_token!
+#       $client.authorization = $authorization
 
-      id_token = $client.authorization.id_token
-      encoded_json_body = id_token.split('.')[1]
-      # Base64 must be a multiple of 4 characters long, trailing with '='
-      encoded_json_body += (['='] * (encoded_json_body.length % 4)).join('')
-      json_body = Base64.decode64(encoded_json_body)
-      body = JSON.parse(json_body)
-      # You can read the Google user ID in the ID token.
-      # "sub" represents the ID token subscriber which in our case
-      # is the user ID. This sample does not use the user ID.
-      gplus_id = body['sub']
+#       id_token = $client.authorization.id_token
+#       encoded_json_body = id_token.split('.')[1]
+#       # Base64 must be a multiple of 4 characters long, trailing with '='
+#       encoded_json_body += (['='] * (encoded_json_body.length % 4)).join('')
+#       json_body = Base64.decode64(encoded_json_body)
+#       body = JSON.parse(json_body)
+#       # You can read the Google user ID in the ID token.
+#       # "sub" represents the ID token subscriber which in our case
+#       # is the user ID. This sample does not use the user ID.
+#       gplus_id = body['sub']
 
-      # Serialize and store the token in the user's session.
-      token_pair = TokenPair.new
-      token_pair.update_token!($client.authorization)
-      session[:token] = token_pair
-    else
-      halt 401, 'The client state does not match the server state.'
-    end
-    status 200
-  else
-    content_type :json
-    'Current user is already connected.'.to_json
-  end
-end
-
-
-##
-# An Example API call, list the people the user shared with this app.
-get '/people' do
-  # Check for stored credentials in the current user's session.
-  if !session[:token]
-    halt 401, 'User not connected.'
-  end
-
-  # Authorize the client and construct a Google+ service.
-  $client.authorization.update_token!(session[:token].to_hash)
-  plus = $client.discovered_api('plus', 'v1')
-
-  # Get the list of people as JSON and return it.
-  response = $client.execute!(plus.people.list,
-      :collection => 'visible',
-      :userId => 'me').body
-  content_type :json
-  response
-end
+#       # Serialize and store the token in the user's session.
+#       token_pair = TokenPair.new
+#       token_pair.update_token!($client.authorization)
+#       session[:token] = token_pair
+#     else
+#       halt 401, 'The client state does not match the server state.'
+#     end
+#     status 200
+#   else
+#     content_type :json
+#     'Current user is already connected.'.to_json
+#   end
+# end
 
 
-##
-# Disconnect the user by revoking the stored token and removing session objects.
-post '/disconnect' do
-  halt 401, 'No stored credentials' unless session[:token]
+# ##
+# # An Example API call, list the people the user shared with this app.
+# get '/people' do
+#   # Check for stored credentials in the current user's session.
+#   if !session[:token]
+#     halt 401, 'User not connected.'
+#   end
 
-  # Use either the refresh or access token to revoke if present.
-  token = session[:token].to_hash[:refresh_token]
-  token = session[:token].to_hash[:access_token] unless token
+#   # Authorize the client and construct a Google+ service.
+#   $client.authorization.update_token!(session[:token].to_hash)
+#   plus = $client.discovered_api('plus', 'v1')
 
-  # You could reset the state at this point, but as-is it will still stay unique
-  # to this user and we're avoiding resetting the client state.
-  # session.delete(:state)
-  session.delete(:token)
-
-  # Send the revocation request and return the result.
-  revokePath = 'https://accounts.google.com/o/oauth2/revoke?token=' + token
-  uri = URI.parse(revokePath)
-  request = Net::HTTP.new(uri.host, uri.port)
-  request.use_ssl = true
-  status request.get(uri.request_uri).code
-end
+#   # Get the list of people as JSON and return it.
+#   response = $client.execute!(plus.people.list,
+#       :collection => 'visible',
+#       :userId => 'me').body
+#   content_type :json
+#   response
+# end
 
 
-##
-# Fill out the templated variables in index.html.
-get '/' do
-  # Create a string for verification
-  if !session[:state]
-    state = (0...13).map{('a'..'z').to_a[rand(26)]}.join
-    session[:state] = state
-  end
-  state = session[:state]
+# ##
+# # Disconnect the user by revoking the stored token and removing session objects.
+# post '/disconnect' do
+#   halt 401, 'No stored credentials' unless session[:token]
 
-  response = File.read('index.html').sub(/[{]{2}\s*STATE\s*[}]{2}/, state)
-  response = response.sub(/[{]{2}\s*CLIENT_ID\s*[}]{2}/, $credentials.client_id)
-  response = response.sub(/[{]{2}\s*APPLICATION_NAME\s*[}]{2}/,
-      APPLICATION_NAME)
-end
+#   # Use either the refresh or access token to revoke if present.
+#   token = session[:token].to_hash[:refresh_token]
+#   token = session[:token].to_hash[:access_token] unless token
+
+#   # You could reset the state at this point, but as-is it will still stay unique
+#   # to this user and we're avoiding resetting the client state.
+#   # session.delete(:state)
+#   session.delete(:token)
+
+#   # Send the revocation request and return the result.
+#   revokePath = 'https://accounts.google.com/o/oauth2/revoke?token=' + token
+#   uri = URI.parse(revokePath)
+#   request = Net::HTTP.new(uri.host, uri.port)
+#   request.use_ssl = true
+#   status request.get(uri.request_uri).code
+# end
+
+
+# ##
+# # Fill out the templated variables in index.html.
+# get '/' do
+#   # Create a string for verification
+#   if !session[:state]
+#     state = (0...13).map{('a'..'z').to_a[rand(26)]}.join
+#     session[:state] = state
+#   end
+#   state = session[:state]
+
+#   response = File.read('index.html').sub(/[{]{2}\s*STATE\s*[}]{2}/, state)
+#   response = response.sub(/[{]{2}\s*CLIENT_ID\s*[}]{2}/, $credentials.client_id)
+#   response = response.sub(/[{]{2}\s*APPLICATION_NAME\s*[}]{2}/,
+#       APPLICATION_NAME)
+# end
 
 
 

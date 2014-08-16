@@ -56,7 +56,6 @@ module WorkoutBuddies
         WHERE username = $1;
       ], [username])
     
-      end
     end
 
 
