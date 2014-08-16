@@ -32,6 +32,28 @@ $authorization = Signet::OAuth2::Client.new(
     :scope => PLUS_LOGIN_SCOPE)
 $client = Google::APIClient.new
 
+
+get '/index1'
+  erb :index
+end
+
+get '/create_event1'
+  erb :create_event
+end
+
+get '/buddies1'
+  erb :buddies
+end
+
+get 'events1'
+  erb :events
+end
+
+get 'home1'
+  erb :home
+end
+
+
 ##
 # Connect the user with Google+ and store the credentials.
 post '/connect' do
