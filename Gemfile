@@ -6,7 +6,6 @@ gem 'google-api-client', '>= 0.6.2', :require => 'google/api_client'
 gem 'signet', '>=0.4.5'
 gem 'json'
 gem 'pg'
-gem 'pry-byebug'
 gem 'rack-flash3'
 
 group :development do
