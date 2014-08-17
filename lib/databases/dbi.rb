@@ -77,6 +77,15 @@ module WorkoutBuddies
       return result.first
     end
 
+    def get_user_name_by_id(user_id)
+      result = @db.exec_params(%Q[
+        SELECT display_name FROM users
+        WHERE user_id = $1;
+      ], [user_id])
+
+      return result.first
+    end
+
     def get_user_by_id_and_zip(user_id, zip)
       result = @db.exec_params(%Q[
         SELECT * FROM users
@@ -138,6 +147,15 @@ module WorkoutBuddies
       result.map{|row| row['activity_id']}
     end
 
+    def get_activity_name_by_id(activity_id)
+        result = @db.exec_params(%Q[
+        SELECT activity_name FROM activities
+        WHERE activity_id = $1;
+      ], [activity_id])
+
+      return result.first    
+    end
+
 
     #####  EVENTS  #####
 
@@ -155,8 +173,11 @@ module WorkoutBuddies
       result = @db.exec(
         "SELECT * FROM events 
         WHERE activity_id IN #{activity_string} AND zip IN #{zip_string}")
-
-      result.map {|row| build_event(row)}
+      result.map do |row|
+        name = get_user_name_by_id(row['user_id'])
+        activity = get_activity_name_by_id(row['activity_id'])
+        {event_id: row['event_id'], event_name: row['event_name'], address: row['address'], zip: row['zip'], creator: name, activity: activity}
+      end
     end
 
     ###### BUDDIES #####

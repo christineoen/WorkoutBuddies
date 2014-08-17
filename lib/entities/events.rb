@@ -10,6 +10,7 @@ module WorkoutBuddies
       @address = data['address']
       @zip = data['zip']
       @user_id = data['user_id']
+      @activity_id = data['activity_id']
     end
 
   end
