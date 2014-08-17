@@ -9,31 +9,6 @@ use Rack::Flash
 set :bind, '0.0.0.0' # Vagrant fix
 set :port, '4567'
 
-
-get '/index1' do
-  erb :index
-end
-
-get '/create_event1' do
-  erb :create_event
-end
-
-get '/profile1' do
-  erb :profile
-end
-
-get '/buddies1' do
-  erb :buddies
-end
-
-get '/events1' do
-  erb :events
-end
-
-get '/home1' do
-  erb :home
-end
-
 get '/home' do
   @user = WorkoutBuddies::DBI.dbi.get_user_by_id(session['workout_buddies'])
   @user_zip = @user.zip
@@ -75,6 +50,15 @@ get '/create_event' do
   else #not in session
     erb :index
   end
+end
+
+post '/create_event' do
+
+  event = WorkoutBuddies::Event.new(params)
+  event.user_id = session['workout_buddies']
+  WorkoutBuddies::DBI.dbi.persist_event(event)
+
+  redirect to '/home'
 end
 
 get '/events' do

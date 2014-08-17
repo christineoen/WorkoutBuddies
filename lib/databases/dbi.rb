@@ -163,8 +163,11 @@ module WorkoutBuddies
       WorkoutBuddies::Event.new(data)
     end
 
-    def create_event(data)
-      
+    def persist_event(event)
+      @db.exec_params(%q[
+        INSERT INTO events (event_name, event_description, address, zip, activity_id)
+        VALUES ($1, $2, $3, $4, $5);
+      ], [event.event_name, event.event_description, event.address, event.zip, event.activity_id])
     end
 
     def get_events(zip_array, activity_array)
@@ -188,7 +191,7 @@ module WorkoutBuddies
       result = @db.exec(
         "SELECT * FROM users
         WHERE activity_id IN #{activity_string} AND zip IN #{zip_string}")
-      result.map do |row| 
+      result.map do |row|
         this_user_id = row["user_id"].to_i
         {user_id: this_user_id, display_name: row['displayname'], profile_pic: row['profile_pic'], zip: row['zip']}
       end
