@@ -18,7 +18,8 @@ module WorkoutBuddies
           zip integer,
           email text,
           phone varchar(30),
-          refresh_token text,
+          profile_pic text,
+          password_digest text,
           created_at timestamp NOT NULL DEFAULT current_timestamp
           )])
       @db.exec(%q[

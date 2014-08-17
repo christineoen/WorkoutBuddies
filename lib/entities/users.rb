@@ -1,3 +1,6 @@
+require 'digest/sha1'
+require 'digest/md5'
+
 module WorkoutBuddies
   class User
     attr_accessor :user_id, :display_name, :address, :zip, :email, :phone, :refresh_token, :activities, :activity_ids
@@ -9,10 +12,23 @@ module WorkoutBuddies
       @zip = data['zip']
       @email = data['email']
       @phone = data['phone']
-      @refresh_token = data['refresh_token']
+      @profile_pic = data['profile_pic']
+      @password_digest = data['password_digest']
       @activity_ids = []
       @activities = []
     end
 
+    def set_profile_pic
+      hash = Digest::MD5.hexdigest(@email)
+      @profile_pic = "http://www.gravatar.com/avatar/#{hash}"
+    end
+
+    def update_password(password)
+      @password_digest = Digest::SHA1.hexdigest(password)
+    end
+
+    def has_password?(password)
+      Digest::SHA1.hexdigest(password) == @password_digest
+    end
   end
 end
