@@ -5,13 +5,13 @@ img {
 .back-div {
 	position: relative;
 	overflow: hidden;
+    box-shadow: 0px 0px 1px 2px #cccccc;
 }
 
 .feat-events {  
     padding:20px;  
     margin:20px;  
     float: left;
-	box-shadow: 1px 1px 1px 2px #cccccc;
 }  
 
 .opaque-content  
@@ -24,7 +24,6 @@ img {
     margin:20px;  
     float: right;
     clear: left;
-	box-shadow: -1px -1px 1px 2px #cccccc;
 }  
   
 .back-div .transparency  
