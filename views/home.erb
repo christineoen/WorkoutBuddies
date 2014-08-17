@@ -31,7 +31,16 @@
 			<h2 class="title">Suggested Buddies</h2>
 		<div class="list-item">
 			<div class="row">
-				<!-- MAKE A FOR LOOP AND DELETE THE EXTRAS WHEN READY -->
+
+				<% @buddies.each do |b| %>
+					<div class="col-md-4">
+						<img src="<%= b[:profile_pic] %>" alt="" class="img-rounded img-responsive">
+						<p><strong><%= b[:display_name] %></strong></p>
+						<p>Favorite activites: <%= b[:activities] %></p>
+						<a href="#" class="more-button btn btn-primary">Email user</a>
+					</div>
+				<% end %>
+
 				<div class="col-md-4 buddy-display">
 					<img src="http://fillmurray.com/300/300" class="img-rounded img-responsive">
 					<p><strong>Name</strong></p>
