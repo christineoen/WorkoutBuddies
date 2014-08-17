@@ -69,13 +69,7 @@
 }
 
 .jumbotron {
-	opacity:0.8;
-  	filter:alpha(opacity=80);
-  	background-color: #fff;
-  	padding-top: 0px;
-  	padding-bottom: 10px;
-  	position: relative;
-  	margin-top: 400px;
+	background: none;
 }
 
 #gConnect {
@@ -90,3 +84,23 @@
   text-align: center;
 
 }
+
+/* link */
+.navbar-default .navbar-nav > li > a {
+    color: #777;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
