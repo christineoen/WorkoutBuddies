@@ -1,5 +1,9 @@
-views/login.erb.html
-Gemfile.lock
-.bundle
+.git
+.gitignore
 vendor
+vendor/bundle
+.bundle
+Gemfile.lock
+views/login.erb.html
+
 
