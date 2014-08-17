@@ -14,8 +14,8 @@ module WorkoutBuddies
       user = WorkoutBuddies::User.new(params)
       user.update_password(params['password'])
       user.set_profile_pic
-      WorkoutBuddies.dbi.persist_user(user)
-      user_id = WorkoutBuddies.dbi.get_user_id(user)
+      WorkoutBuddies::DBI.dbi.persist_user(user)
+      user_id = WorkoutBuddies::DBI.dbi.get_user_id(user)
       user.update_user_id(user_id)
 
 

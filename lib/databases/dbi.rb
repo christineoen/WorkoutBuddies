@@ -67,6 +67,15 @@ module WorkoutBuddies
       return result.first['user_id'].to_i
     end
 
+    def get_user_by_id(user_id)
+      result = @db.exec_params(%Q[
+        SELECT * FROM users
+        WHERE user_id = $1;
+      ], [user_id])
+
+      return result.first
+    end
+
     def get_user_by_id_and_zip(user_id, zip)
       result = @db.exec_params(%Q[
         SELECT * FROM users
@@ -161,13 +170,14 @@ module WorkoutBuddies
         {user_id: this_user_id, display_name: row['displayname'], profile_pic: row['profile_pic'], zip: row['zip']}
       end
     end
+  
+  # singleton creation
+    def self.dbi
+      @__db_instance ||= DBI.new
+    end
 
   # end of dbi class
   end
 
 
-# singleton creation
-  def self.dbi
-    @__db_instance ||= DBI.new
-  end
 end
