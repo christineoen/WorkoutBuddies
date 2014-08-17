@@ -1,6 +1,6 @@
 module WorkoutBuddies
   class User
-    attr_accessor :user_id, :display_name, :address, :zip, :email, :phone, :refresh_token, :activities, :activity_ids
+    attr_accessor :user_id, :display_name, :address, :zip, :email, :phone, :refresh_token, :activities, :activity_ids, :password_digest, :profile_pic
 
     def initialize(data = {})
       @user_id = data['user_id']

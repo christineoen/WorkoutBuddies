@@ -54,7 +54,7 @@ module WorkoutBuddies
     def persist_user(user)
       @db.exec_params(%q[
         INSERT INTO users (email, display_name, password, profile_pic)
-        VALUES ($1, $2, $3);
+        VALUES ($1, $2, $3, $4);
       ], [user.email, user.display_name, user.password_digest, user.profile_pic])
     end
 
@@ -67,11 +67,12 @@ module WorkoutBuddies
       return result.first['user_id'].to_i
     end
 
-    def get_user_by_id(user_id)
+    def get_user_by_id_and_zip(user_id, zip)
       result = @db.exec_params(%Q[
         SELECT * FROM users
-        WHERE user_id = $1;
-      ], [user_id])
+        WHERE user_id = $1
+        AND zip = $2;
+      ], [user_id, zip])
 
       return result.first
     
@@ -92,16 +93,30 @@ module WorkoutBuddies
       end
     end
 
+    def email_exists?(email)
+      result = @db.exec(%Q[
+        SELECT *
+        FROM users
+        WHERE email = $1;
+      ], [email])
+    
+      if result.count > 0
+        true
+      else
+        false
+      end
+    end
+
 
     #####  ACTIVITY MATCHING  #####
 
-    def get_users_by_activity_id(activity_id)
+    def get_users_by_activity_id(activity_id, zip)
       result = @db.exec_params(%q[
         SELECT * FROM matching
         WHERE activity_id = $1;
         ], [activity_id])
 
-        result.map{|row| build_user(row)}
+        result.map{|user_id| get_user_by_id_and_zip(user_id['user_id'], zip)}
     end
 
     def get_activity_ids_by_user_id(user_id)

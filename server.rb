@@ -4,6 +4,8 @@ require 'pry-byebug'
 
 require_relative 'lib/workoutbuddies.rb'
 
+set :sessions, true
+use Rack::Flash
 set :bind, '0.0.0.0' # Vagrant fix
 set :port, '4567'
 
@@ -35,7 +37,7 @@ end
 get '/home' do
   erb :home
   @user = WorkoutBuddies::DBI.dbi.get_user_by_id(session['workout_buddies'])
-  @buddies = WorkoutBuddies::DBI.dbi.get_buddy_data(session['workout_buddies'])    
+  # @buddies = WorkoutBuddies::DBI.dbi.get_buddy_data(session['workout_buddies'])    
   ##NEED to WRITE THIS AND the table for buddy matches and the  method in the DBI
   user_zip = @user.zip
     ##run something through google maps api to find nearest zip codes to user_zip
@@ -97,15 +99,15 @@ get '/events' do
   end
 end
 
-get '/login' do
+get '/signin' do
   if session['workout_buddies']
     erb :home
   else #not in session
-    erb :login
+    erb :signin
   end
 end
 
-post '/login' do
+post '/signin' do
   sign_in = WorkoutBuddies::SignIn.run(params)
 
   if sign_in[:success?]
@@ -113,7 +115,7 @@ post '/login' do
     redirect to '/'
   else
     flash.now[:alert] = sign_in[:error]
-    redirect to '/login'
+    redirect to '/signin'
   end
 end
 

@@ -1,3 +1,21 @@
+<div class="back-div intro">
+    <div class="transparency"></div>
+    <div class="list-content">
+        <h1>Welcome to Workout Buddies</h1>
+        <p>This app aims to help you find partners near you to workout with based on your interests. Sign in with your Google Account to enter the app!</p>
+    </div>
+</div>
+  <div id="gConnect">
+    <button class="g-signin"
+        data-scope="https://www.googleapis.com/auth/plus.login"
+        data-requestvisibleactions="http://schemas.google.com/AddActivity"
+        data-clientId="{{ CLIENT_ID }}"
+        data-accesstype="offline"
+        data-callback="onSignInCallback"
+        data-theme="dark"
+        data-cookiepolicy="single_host_origin">
+    </button>
+  </div>
 <style type="text/css">
 	body {
         background-image: url(../images/yoga.jpg);
@@ -14,9 +32,9 @@
 
     <a href="/login"><button>Sign In</button></a>
     <a href="/signup"><button>Sign Up</button></a>
+
     </div>
 </div>
-
 
 
 
