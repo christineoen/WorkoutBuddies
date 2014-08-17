@@ -50,6 +50,22 @@ module WorkoutBuddies
       WorkoutBuddies::User.new(data)
     end
 
+    def persist_user(user)
+      @db.exec_params(%q[
+        INSERT INTO users (email, display_name, password)
+        VALUES ($1, $2, $3);
+      ], [user.email, user.display_name, user.password_digest])
+    end
+
+    def get_user_id(user)
+      result = @db.exec_params(%q[
+        SELECT user_id from users
+        WHERE email = $1;
+        ], [user.email])
+
+      return result.first['user_id'].to_i
+    end
+
     def get_user_by_id(user_id)
       result = @db.exec_params(%Q[
         SELECT * FROM users
@@ -58,6 +74,21 @@ module WorkoutBuddies
 
       return result.first
     
+    end
+
+    def get_user_by_email(email)
+      result = @db.exec(%q[
+        SELECT * FROM users 
+        WHERE email = $1;
+      ],[email])
+
+      user_data = result.first
+
+      if user_data
+        build_user(user_data)
+      else
+        nil
+      end
     end
 
 

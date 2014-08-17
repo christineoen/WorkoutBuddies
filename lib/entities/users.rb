@@ -14,6 +14,18 @@ module WorkoutBuddies
       @activities = []
     end
 
+    def update_password(password)
+      @password_digest = Digest::SHA1.hexdigest(password)
+    end
+
+    def has_password?(password)
+      Digest::SHA1.hexdigest(password) == @password_digest
+    end
+
+    def update_user_id(user_id)
+      @user_id = user_id
+    end
+
   end
 
 end
