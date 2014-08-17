@@ -1,33 +1,75 @@
+<style type="text/css">
+	.back-div {
+		border: 1px solid #cccccc;
+		padding: 20px;
+	}
+</style>
+
+<div class="container back-div">
+	<div class="transparency"></div>
 <div class="container">
+<div class="container">
+	<div class="row">
+		<h1>Add an event</h1>
+		<p class="lead">Plan a softball tournament. Schedule a hot yoga session.<br>Your event, your way. <strong>With active people like you.</strong></p>
+	</div>
 	<div class="row">
 		<form role="form">
 			<div class="form-group">
 				<label for="eventName">Event Name</label>
-				<input type="text" class="form-control" id="eventName" placeholder="">
+				<input type="text" class="form-control" id="eventName" placeholder="Enter a name for your event">
 			</div>
 			<div class="form-group">
 				<label for="eventDesc">Description</label>
-    			<textarea class="form-control" rows="3" id="eventDesc" placeholder=""></textarea>
+    			<textarea class="form-control" rows="3" id="eventDesc" placeholder="This may be a good place to add the time of your event."></textarea>
   			</div>
   			<div class="form-group">
   				<div class="row">
 	  				<div class="col-sm-9">
 		  				<label for="address">Address</label>
-		  				<input type="text" class="form-control" id="address" placeholder="">
+		  				<input type="text" class="form-control" id="address" placeholder="Where is it happening?">
 	  				</div>
 	  				<div class="col-sm-3">
 	  					<label for="zip">Zipcode</label>
+		  				<input type="text" class="form-control" id="zip" placeholder="Enter the zipcode">
+		  				<label for="address">Street address</label>
+		  				<input type="text" class="form-control" id="address" placeholder="">
+	  				</div>
+	  				<div class="col-sm-3">
+	  					<label for="zip">Zip code</label>
 		  				<input type="text" class="form-control" id="zip" placeholder="">
 		  			</div>
 	  		</div>
   			</div>
   			<div class="form-group">
+  				<div class="row">
+  					<div class="col-sm-9">
+  						<label for="date">Date</label>
+  						<input type="date" class="form-control" id="datepicker">
+  					</div>
+  					<div class="col-sm-3">
+		  				<label for="activity">Activity</label>
+		  				<select class="form-control">
+							<option disabled selected></option>
+							<option>Running</option>
+							<option>Yoga</option>
+							<option>Cycling</option>
+							<option>Volleyball</option>
+							<option>Ultimate Frisbee</option>
+							<option>Swimming</option>
+							<option>Tennis</option>
+							<option>Football</option>
+							<option>Rugby</option>
+							<option>Softball</option>
+						</select>
+					</div>
+				</div>
   				<label for="date">Date</label>
   				<input type="text" class="form-control" id="datepicker">
   			</div>
   			<div class="form-group">
   				<label for="activity">Activity</label>
-  				<select class="form-control">
+  				<select class="form-control" id="activity">
 					<option disabled selected></option>
 					<option>Running</option>
 					<option>Yoga</option>
@@ -41,7 +83,7 @@
 					<option>Softball</option>
 				</select>
   			</div>
-  			<button type="submit" class="btn btn-primary">Create Event</button>
+			<button type="submit" class="btn btn-success btn-lg">Create event</button>
 		</form>
 	</div>
 </div>

@@ -18,6 +18,10 @@ get '/create_event1' do
   erb :create_event
 end
 
+get '/profile1' do
+  erb :profile
+end
+
 get '/buddies1' do
   erb :buddies
 end
