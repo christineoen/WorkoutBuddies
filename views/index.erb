@@ -1,9 +1,42 @@
 <style type="text/css">
 	body {
-		background-image: url(../images/landing_background.jpg);
+        background-image: url(../images/yoga.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #000;
 	}
+
+    .back-div {
+        padding: 5em;
+        width: 100%;
+    }
+
+    .back-div h1 {
+        font-size: 63px;
+    }
+
+    .back-div p {
+        margin-bottom: 15px;
+        font-size: 21px;
+        font-weight: 200;
+    }
+
+    .back-div .transparency {
+        opacity:0.8;  
+        filter:alpha(opacity=80);  
+        -moz-opacity:0.8;
+    }
 </style>
 
-<h1>Welcome to Workout Buddies</h1>
-<p>This app aims to help you find partners near you to workout with based on your interests. Sign in with your Google Account to enter the app!</p>
-<p>Sign in button</p>
+<div class="container back-div">
+    <div class="transparency"></div>
+    <h1>Welcome to Workout Buddies</h1>
+    <p>This app aims to help you find partners near you to workout with based on your interests!</p>
+    <a href="/signin" class="more-button btn btn-warning">Sign In</a>
+    <a href="/signup" class="more-button btn btn-warning">Sign Up</a>
+</div>
+
+
+
+
+
