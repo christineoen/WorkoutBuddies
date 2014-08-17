@@ -1,31 +1,29 @@
+img {
+  max-width: 100%;
+}
 
 .back-div {
 	position: relative;
 	overflow: hidden;
+    box-shadow: 0px 0px 1px 2px #cccccc;
 }
 
 .feat-events {  
     padding:20px;  
-    /*position:relative;  */
     margin:20px;  
-    /*overflow:hidden;  */
     float: left;
-	box-shadow: 1px 1px 1px 2px #cccccc;
 }  
 
-.list-content  
+.opaque-content  
 {  
     position:relative;  
 } 
 
 .suggested-buddies {  
     padding:20px;  
-    /*position:relative;  */
     margin:20px;  
-    /*overflow:hidden;  */
     float: right;
     clear: left;
-	box-shadow: -1px -1px 1px 2px #cccccc;
 }  
   
 .back-div .transparency  
@@ -69,13 +67,7 @@
 }
 
 .jumbotron {
-	opacity:0.8;
-  	filter:alpha(opacity=80);
-  	background-color: #fff;
-  	padding-top: 0px;
-  	padding-bottom: 10px;
-  	position: relative;
-  	margin-top: 400px;
+	background: none;
 }
 
 #gConnect {

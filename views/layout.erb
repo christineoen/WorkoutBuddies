@@ -12,7 +12,7 @@
     </style>
 	</head>
 	<body>
-	        <!-- PUT THIS IN ONCE WE HAVE SESSIONS WORKING!--> <% if session['workout_buddies'] %> 
+	        <!-- PUT THIS IN ONCE WE HAVE SESSIONS WORKING!--> <% # if session['workout_buddies'] %> 
     <nav class="navbar navbar-default" role="navigation">
           <div class="container-fluid">
 	          <div class="navbar-header">
@@ -29,12 +29,14 @@
 	              <li><a href="/buddies">BUDDIES</a></li>
 	              <li><a href="/events">EVENTS</a></li>
 	              <li><a href="/profile">PROFILE</a></li>
-
 	            </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">SIGN OUT</a></li>
+              </ul>
 	          </div><!--/.nav-collapse -->
           </div><!--/.container-fluid -->
       </nav>
-	         <!-- PUT THIS IN ONCE WE HAVE SESSIONS!-->  <% end %> 
+	         <!-- PUT THIS IN ONCE WE HAVE SESSIONS!-->  <% # end %> 
 
 	    <%= yield %>
 
