@@ -120,7 +120,11 @@ module WorkoutBuddies
       result.map {|row| build_event(row)}
     end
 
+    ###### BUDDIES #####
 
+    def get_buddy_data(user_id)
+
+    end
 
   # end of dbi class
   end
