@@ -1,4 +1,58 @@
+.back-div {
+	position: relative;
+	overflow: hidden;
+}
+
+.feat-events {  
+    padding:20px;  
+    /*position:relative;  */
+    margin:20px;  
+    /*overflow:hidden;  */
+    float: left;
+	box-shadow: 1px 1px 1px 2px #cccccc;
+}  
+
+.list-content  
+{  
+    position:relative;  
+} 
+
+.suggested-buddies {  
+    padding:20px;  
+    /*position:relative;  */
+    margin:20px;  
+    /*overflow:hidden;  */
+    float: right;
+    clear: left;
+	box-shadow: -1px -1px 1px 2px #cccccc;
+}  
+  
+.back-div .transparency  
+{  
+    opacity:0.95;  
+    filter:alpha(opacity=95);  
+    -moz-opacity:0.95;  
+    background-color: white;  
+    width: 100%;  
+    height:1500px;  
+    position:absolute;  
+    top:0px;  
+    left:0px;  
+    z-index:-1;  
+}  
+
+.suggested-buddies, .feat-events {
+	width: 80%;
+}  
+
 .profile-img {
 	width:70%;
 	margin: auto;
+}
+
+.intro {
+    border-top: solid 1px #cccccc;
+    border-bottom: solid 1px #cccccc;
+    margin-bottom: 20px;
+    padding: 20px;
 }
