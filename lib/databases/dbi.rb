@@ -36,6 +36,7 @@ module WorkoutBuddies
         CREATE TABLE IF NOT EXISTS events(
           event_id serial NOT NULL PRIMARY KEY,
           event_name text,
+          event_description text,
           address text,
           zip integer,
           user_id integer REFERENCES users(user_id),
@@ -53,9 +54,9 @@ module WorkoutBuddies
 
     def persist_user(user)
       @db.exec_params(%q[
-        INSERT INTO users (email, display_name, password, profile_pic)
-        VALUES ($1, $2, $3, $4);
-      ], [user.email, user.display_name, user.password_digest, user.profile_pic])
+        INSERT INTO users (email, display_name, password, profile_pic, address, zip)
+        VALUES ($1, $2, $3, $4, $5, $6);
+      ], [user.email, user.display_name, user.password_digest, user.profile_pic, user.address, user.zip])
     end
 
     def get_user_id(user)
@@ -144,13 +145,17 @@ module WorkoutBuddies
       WorkoutBuddies::Event.new(data)
     end
 
+    def create_event(data)
+      
+    end
+
     def get_events(zip_array, activity_array)
       zip_string = "(#{zip_array.join(", ")})"
       activity_string = "(#{activity_array.join(", ")})"
       result = @db.exec_params(%q[
         SELECT * FROM events 
         WHERE zip IN $1 AND activity_id IN $2;
-        ], [zip_string, activity_string])       
+        ], [zip_string, activity_string])    
 
       result.map {|row| build_event(row)}
     end
