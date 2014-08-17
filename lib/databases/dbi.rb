@@ -179,7 +179,7 @@ module WorkoutBuddies
       result.map do |row|
         name = get_user_name_by_id(row['user_id'])
         activity = get_activity_name_by_id(row['activity_id'])
-        {event_id: row['event_id'], event_name: row['event_name'], address: row['address'], zip: row['zip'], creator: name, activity: activity}
+        {event_id: row['event_id'], event_name: row['event_name'], address: row['address'], zip: row['zip'], creator: name, activity: activity, description: row['event_description']}
       end
     end
 

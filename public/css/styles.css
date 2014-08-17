@@ -1,3 +1,17 @@
+.navbar {
+    padding: 0.8em 1.2em 0.8em 1.2em;
+    font-size: 20px;
+}
+
+.nav-items {
+    padding-left: 1em;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #5cb85c;
+}
+
 img {
   max-width: 100%;
 }
