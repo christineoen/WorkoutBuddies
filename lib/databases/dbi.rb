@@ -182,15 +182,15 @@ module WorkoutBuddies
 
     ###### BUDDIES #####
 
-    def get_buddy_data(zip_array, activity_array)
-      zip_string = "(#{zip_array.join(", ")})"
-      activity_string = "(#{activity_array.join(", ")})"
+    def get_buddy_data(id)
       result = @db.exec(
-        "SELECT * FROM users
-        WHERE activity_id IN #{activity_string} AND zip IN #{zip_string}")
+        "SELECT user_id, display_name, profile_pic, zip FROM users
+        WHERE user_id != #{id}") 
       result.map do |row| 
-        this_user_id = row["user_id"].to_i
-        {user_id: this_user_id, display_name: row['displayname'], profile_pic: row['profile_pic'], zip: row['zip']}
+        activity_ids = get_activity_ids_by_user_id(row['user_id'])
+        activities = activity_ids.map {|x| get_activity_name_by_id(x)}
+        activity_string = activities.map{|y| y["activity_name"]}.join(', ')
+        {user_id: row["user_id"], display_name: row['display_name'], profile_pic: row['profile_pic'], zip: row['zip'], activities: activity_string}
       end
     end
   
