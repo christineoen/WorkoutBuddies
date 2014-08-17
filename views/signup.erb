@@ -1,8 +1,8 @@
 <div align="center">
   <h2>Signup!</h2>
-  <% if flash[:alert] %>
-    Alert:<%= flash[:alert] %>
-  <% end %>
+  <% #if flash[:alert] %>
+    <!--Alert:--><%= #flash[:alert] %>
+  <% #end %>
   <form action='/signup' method='post'>
     <input type='email' name='email' required = "required" placeholder='Email'><br>
     <input type='text' name='display_name' placeholder='Display Name' required = "required"><br>

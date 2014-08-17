@@ -104,6 +104,14 @@ module WorkoutBuddies
         result.map{|row| build_user(row)}
     end
 
+    def get_activity_ids_by_user_id(user_id)
+      result = @db.exec_params(%q[
+        SELECT activity_id FROM matching
+        WHERE user_id = $1;
+        ], [user_id])
+
+      result.map{|row| row['activity_id']}
+    end
 
 
     #####  EVENTS  #####
@@ -113,8 +121,8 @@ module WorkoutBuddies
     end
 
     def get_events(zip_array, activity_array)
-      zip_array.join(", ")
-      activity_string = activity_array.join(", ")
+      zip_string = "(#{zip_array.join(", ")})"
+      activity_string = "(#{activity_array.join(", ")})"
       result = @db.exec_params(%q[
         SELECT * FROM events 
         WHERE zip IN $1 AND activity_id IN $2;
@@ -126,20 +134,17 @@ module WorkoutBuddies
     ###### BUDDIES #####
 
     def get_buddy_data(zip_array, activity_array)
-      zip_string = zip_array.join(', ')
-      activity_string = activity_array.join(', ')
+      zip_string = "(#{zip_array.join(", ")})"
+      activity_string = "(#{activity_array.join(", ")})"
       result = @db.exec_params(%q[
         SELECT user_id, display_name, profile_pic, zip FROM users, matching
         WHERE users.zip IN $1 AND matching.activity_id IN $2 AND users.user_id = matching.user_id;
         ], [zip_string, activity_string])
 
-      result.map do |row|
-        {user_id: row['user_id'].to _i,
-          display_name: row['displayname'],
-          profile_pic: row['profile_pic'],
-          zip: row['zip']
-        }
-      end      
+      result.map do |row| 
+        this_user_id = row["user_id"].to_i
+        {user_id: this_user_id, display_name: row['displayname'], profile_pic: row['profile_pic'], zip: row['zip']}
+      end
     end
 
   # end of dbi class

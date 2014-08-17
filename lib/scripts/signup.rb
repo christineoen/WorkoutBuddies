@@ -1,3 +1,5 @@
+require 'pony'
+
 module WorkoutBuddies
   class SignUp
     def self.run(params)
