@@ -1,26 +1,25 @@
 <style type="text/css">
-  input {
-    margin: 10px;
-    padding: 5px;
-    /*border-radius: 5px;*/
+  .textboxes {
+    width: 30%;
   }
 
-  .back-div {
-
+  form {
+    margin: 20px;
   }
+
 </style>
 
 <div class="back-div" align="center">
   <div class="transparency"></div>
-  <h2>Signup!</h2>
+  <h2>Sign Up!</h2>
 
   <form action='/signup' method='post'>
-    <input type='email' name='email' required = "required" placeholder='Email'><br>
-    <input type='text' name='display_name' placeholder='Display Name' required = "required"><br>
-    <input type="text" name="address" placeholder="Street Address" required = "required"><br>
-    <input type="text" name="zip" placeholder="Zip Code" required = "required"><br>
-    <input type='password' name='password' placeholder='Password' required = "required"><br>
-    <input type='password' name='password_confirm' placeholder='Verify password' required = "required"><br>
-    <input type='submit' class="btn btn-primary" value='Submit'>
+    <input class= "textboxes form-control" type='email' name='email' required = "required" placeholder='Email'><br>
+    <input class= "textboxes form-control" type='text' name='display_name' placeholder='Display Name' required = "required"><br>
+    <input class= "textboxes form-control" type="text" name="address" placeholder="Street Address" required = "required"><br>
+    <input class= "textboxes form-control" type="text" name="zip" placeholder="Zip Code" required = "required"><br>
+    <input class= "textboxes form-control" type='password' name='password' placeholder='Password' required = "required"><br>
+    <input class= "textboxes form-control" type='password' name='password_confirm' placeholder='Verify password' required = "required"><br>
+    <input type='submit' class="btn btn-primary btn-lg" value='Submit'>
   </form>
 </div>
