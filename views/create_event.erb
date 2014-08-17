@@ -13,53 +13,53 @@
 		<p class="lead">Plan a softball tournament. Schedule a hot yoga session.<br>Your event, your way. <strong>With active people like you.</strong></p>
 	</div>
 	<div class="row">
-		<form role="form">
+		<form role="form" action='/create_event' method='post'>
 			<div class="form-group">
 				<label for="eventName">Event Name</label>
-				<input type="text" class="form-control" id="eventName" placeholder="Enter a name for your event">
+				<input type="text" name="event_name" class="form-control" id="eventName" placeholder="Enter a name for your event">
 			</div>
 			<div class="form-group">
 				<label for="eventDesc">Description</label>
-    			<textarea class="form-control" rows="3" id="eventDesc" placeholder="This may be a good place to add the time of your event."></textarea>
+    			<textarea class="form-control" name="event_description" rows="3" id="eventDesc" placeholder="Enter a description of your event, including date and time."></textarea>
   			</div>
   			<div class="form-group">
   				<div class="row">
 	  				<div class="col-sm-9">
 		  				<label for="address">Street address</label>
-		  				<input type="text" class="form-control" id="address" placeholder="Where is it happening?">
+		  				<input type="text" name="address" class="form-control" id="address" placeholder="Where is it happening?">
 	  				</div>
 	  				<div class="col-sm-3">
 	  					<label for="zip">Zip code</label>
-		  				<input type="text" class="form-control" id="zip" placeholder="Enter the zipcode">
+		  				<input type="text" name="zip" class="form-control" id="zip" placeholder="Enter the zipcode">
 		  			</div>
 	  		</div>
   			</div>
-  			<div class="form-group">
+<!--   			<div class="form-group">
   				<div class="row">
   					<div class="col-sm-6">
 		  				<label for="date">Date</label>
-		  				<input type="text" class="form-control" id="datepicker" placeholder="mm/dd/yy">
+		  				<input type="text" name="date" class="form-control" id="datepicker" placeholder="mm/dd/yy">
 		  			</div>
 		  			<div class="col-sm-6">
 		  				<label for="time">Time</label>
-		  				<input type="text" class="form-control" id="time" placeholder="12:00 PM">
+		  				<input type="text" name="time" class="form-control" id="time" placeholder="12:00 PM">
 		  			</div>
 	  			</div>
-  			</div>
+  			</div> -->
   			<div class="form-group">
   				<label for="activity">Activity</label>
   				<select class="form-control" id="activity">
 					<option disabled selected></option>
-					<option>Running</option>
-					<option>Yoga</option>
-					<option>Cycling</option>
-					<option>Volleyball</option>
-					<option>Ultimate Frisbee</option>
-					<option>Swimming</option>
-					<option>Tennis</option>
-					<option>Football</option>
-					<option>Rugby</option>
-					<option>Softball</option>
+					<option value="2">Running</option>
+					<option value="1">Yoga</option>
+					<option value="3">Cycling</option>
+					<option value="8">Kickball</option>
+					<option value="4">Ultimate Frisbee</option>
+					<option value="9">Swimming</option>
+					<option value="5">Tennis</option>
+					<option value="6">Dance</option>
+					<option value="7">Rugby</option>
+					<option value="10">Softball</option>
 				</select>
   			</div>
 			<button type="submit" class="btn btn-success btn-lg">Create event</button>

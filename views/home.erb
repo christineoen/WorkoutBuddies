@@ -9,22 +9,15 @@
 		<div class="transparency"></div>
 		<div class="opaque-content">
 			<h2 class="title">Featured Events</h2>
-			<div class="list-item">
-				<p>Name</p>
-				<p>Add description here.</p>
-				<p>Recommended for you because: x, y, z</p>
+			<div class="row">
+					<div class="col-md-4">
+						<h3><%= @events[0][:event_name] %></h3>
+						<p>Activity: <%= @events[0][:activity]["activity_name"] %></p>
+						<p><%= @events[0][:description] %></p>
+						<p>Address: <%= @events[0][:address] %></p>
+						<p>Event created by <em><%= @events[0][:creator]["display_name"] %></em></p>
+					</div>
 			</div>
-			<div class="list-item">
-				<p>Name</p>
-				<p>Add description here.</p>
-				<p>Recommended for you because: x, y, z</p>
-			</div>
-			<div class="list-item">
-				<p>Name</p>
-				<p>Add description here.</p>
-				<p>Recommended for you because: x, y, z</p>
-			</div>
-
 		</div>
 		<div class="center-block">
 			<a href="/events" class="more-button btn btn-success btn-lg">Find more events</a>
@@ -40,28 +33,28 @@
 			<div class="row">
 				<!-- MAKE A FOR LOOP AND DELETE THE EXTRAS WHEN READY -->
 				<div class="col-md-4 buddy-display">
-					<img src="../images/test-profile-photo.jpg" class="img-rounded img-responsive">
+					<img src="http://fillmurray.com/300/300" class="img-rounded img-responsive">
 					<p><strong>Name</strong></p>
 					<p>Location</p>
 					<p>Interests</p>
 					<a href="#" class="more-button btn btn-primary">Email</a>
 				</div>
 				<div class="col-md-4 buddy-display">
-					<img src="../images/test-profile-photo.jpg" class="img-rounded img-responsive">
+					<img src="http://fillmurray.com/300/300" class="img-rounded img-responsive">
 					<p><strong>Name</strong></p>
 					<p>Location</p>
 					<p>Interests</p>
 					<a href="#" class="more-button btn btn-primary">Email</a>
 				</div>
 				<div class="col-md-4 buddy-display">
-					<img src="../images/test-profile-photo.jpg" class="img-rounded img-responsive">
+					<img src="http://fillmurray.com/300/300" class="img-rounded img-responsive">
 					<p><strong>Name</strong></p>
 					<p>Location</p>
 					<p>Interests</p>
 					<a href="#" class="more-button btn btn-primary">Email</a>
 				</div>
 				<div class="col-md-4 buddy-display">
-					<img src="../images/test-profile-photo.jpg" class="img-rounded img-responsive">
+					<img src="http://fillmurray.com/300/300" class="img-rounded img-responsive">
 					<p><strong>Name</strong></p>
 					<p>Location</p>
 					<p>Interests</p>
