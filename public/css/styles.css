@@ -1,4 +1,32 @@
-.profile-img {
-	width:70%;
+.buddy-display {
+	text-align: center;
+	font-size: 1.2em;
+	margin: 20px 0px;
+}
+
+.buddy-display img {
+	width:80%;
 	margin: auto;
+}
+
+.jumbotron {
+	opacity:0.8;
+  	filter:alpha(opacity=80);
+  	background-color: #fff;
+  	padding-top: 0px;
+  	padding-bottom: 10px;
+  	position: relative;
+  	margin-top: 400px;
+}
+
+#gConnect {
+	text-align: center;
+	width: 100%;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
