@@ -36,6 +36,7 @@ module WorkoutBuddies
         CREATE TABLE IF NOT EXISTS events(
           event_id serial NOT NULL PRIMARY KEY,
           event_name text,
+          event_description text,
           address text,
           zip integer,
           user_id integer REFERENCES users(user_id),
@@ -53,9 +54,9 @@ module WorkoutBuddies
 
     def persist_user(user)
       @db.exec_params(%q[
-        INSERT INTO users (email, display_name, password, profile_pic)
-        VALUES ($1, $2, $3, $4);
-      ], [user.email, user.display_name, user.password_digest, user.profile_pic])
+        INSERT INTO users (email, display_name, password, profile_pic, address, zip)
+        VALUES ($1, $2, $3, $4, $5, $6);
+      ], [user.email, user.display_name, user.password_digest, user.profile_pic, user.address, user.zip])
     end
 
     def get_user_id(user)
@@ -70,6 +71,15 @@ module WorkoutBuddies
     def get_user_by_id(user_id)
       result = @db.exec_params(%Q[
         SELECT * FROM users
+        WHERE user_id = $1;
+      ], [user_id])
+
+      return result.first
+    end
+
+    def get_user_name_by_id(user_id)
+      result = @db.exec_params(%Q[
+        SELECT display_name FROM users
         WHERE user_id = $1;
       ], [user_id])
 
@@ -137,6 +147,15 @@ module WorkoutBuddies
       result.map{|row| row['activity_id']}
     end
 
+    def get_activity_name_by_id(activity_id)
+        result = @db.exec_params(%Q[
+        SELECT activity_name FROM activities
+        WHERE activity_id = $1;
+      ], [activity_id])
+
+      return result.first    
+    end
+
 
     #####  EVENTS  #####
 
@@ -144,14 +163,21 @@ module WorkoutBuddies
       WorkoutBuddies::Event.new(data)
     end
 
+    def create_event(data)
+      
+    end
+
     def get_events(zip_array, activity_array)
       zip_string = "(#{zip_array.join(", ")})"
-      activity_string = "(#{activity_array.join(", ")})"
+      activity_string = "(#{activity_array.join(", ")})" 
       result = @db.exec(
         "SELECT * FROM events 
         WHERE activity_id IN #{activity_string} AND zip IN #{zip_string}")
-               
-      result.map {|row| build_event(row)}
+      result.map do |row|
+        name = get_user_name_by_id(row['user_id'])
+        activity = get_activity_name_by_id(row['activity_id'])
+        {event_id: row['event_id'], event_name: row['event_name'], address: row['address'], zip: row['zip'], creator: name, activity: activity, description: row['event_description']}
+      end
     end
 
     ###### BUDDIES #####

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'pry-byebug'
 gem 'sinatra', :require => 'sinatra/base'
