@@ -187,7 +187,7 @@ module WorkoutBuddies
 
     def get_buddy_data(id)
       result = @db.exec(
-\        "SELECT user_id, display_name, profile_pic, zip FROM users
+        "SELECT user_id, display_name, profile_pic, zip FROM users
         WHERE user_id != #{id}") 
       result.map do |row| 
         activity_ids = get_activity_ids_by_user_id(row['user_id'])
