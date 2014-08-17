@@ -3,5 +3,17 @@
 	<h2 class="title">Events Near You</h2>
 
 	<div id="list-container">
+		<div class="container">
+			<div class="row">
+				<% @events.each do |e| %>
+					<div class="col-md-4">
+						<h3><%= e[:event_name] %></h3>
+						<p>Activity: <%= e[:activity]["activity_name"] %></p>
+						<p>Address: <%= e[:address] %></p>
+						<p>Event created by <em><%= e[:creator]["display_name"] %></em></p>
+					</div>
+				<% end %>
+			</div>
+		</div>
 	</div>
 </div>
