@@ -18,7 +18,7 @@ module WorkoutBuddies
           zip integer,
           email text,
           phone varchar(30),
-          refresh_token text,
+          profile_pic text,
           created_at timestamp NOT NULL DEFAULT current_timestamp
           )])
       @db.exec(%q[
@@ -52,9 +52,9 @@ module WorkoutBuddies
 
     def persist_user(user)
       @db.exec_params(%q[
-        INSERT INTO users (email, display_name, password)
+        INSERT INTO users (email, display_name, password, profile_pic)
         VALUES ($1, $2, $3);
-      ], [user.email, user.display_name, user.password_digest])
+      ], [user.email, user.display_name, user.password_digest, user.profile_pic])
     end
 
     def get_user_id(user)

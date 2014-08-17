@@ -9,7 +9,8 @@ module WorkoutBuddies
       @zip = data['zip']
       @email = data['email']
       @phone = data['phone']
-      @refresh_token = data['refresh_token']
+      @profile_pic = data['profile_pic']
+      @password_digest = data['password_digest']
       @activity_ids = []
       @activities = []
     end
@@ -25,6 +26,12 @@ module WorkoutBuddies
     def update_user_id(user_id)
       @user_id = user_id
     end
+
+    def set_profile_pic
+      hash = Digest::MD5.hexdigest(@email)
+      @profile_pic = "http://www.gravatar.com/avatar/#{hash}"
+    end
+
 
   end
 
